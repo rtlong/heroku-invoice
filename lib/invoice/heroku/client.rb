@@ -1,10 +1,6 @@
 class Heroku::Client
-  def get_invoice(opts = 'current')
-    url = if opts.is_a?(Array)
-            "#{y}/#{m}"
-          else
-            "current"
-          end
-    get("invoices/show/#{url}").to_s
+  def get_invoice(*opts)
+    url = opts.map(&:to_i).join('/')
+    get("invoices/#{url}").to_s
   end
 end
